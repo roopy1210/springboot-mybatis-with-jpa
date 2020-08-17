@@ -23,11 +23,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableJpaRepositories(
 	entityManagerFactoryRef = "mysqlEntityManagerFactory",
 	transactionManagerRef = "mysqlTransactionManager",
-	basePackages = {"com.roopy.persistence.repository"}
+	basePackages = {"com.roopy.persistence.mysql.repository"}
 )
 @MapperScan(
 	sqlSessionFactoryRef = "mysqlSqlSessionFactory",
-	basePackages = {"com.roopy.persistence.mapper"}
+	basePackages = {"com.roopy.persistence.mysql.mapper"}
 )
 public class MySQLDb extends BaseDataBaseConfig {
 

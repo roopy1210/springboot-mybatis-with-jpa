@@ -23,11 +23,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableJpaRepositories(
 	entityManagerFactoryRef = "pgsqlEntityManagerFactory",
 	transactionManagerRef = "pgsqlTransactionManager",
-	basePackages = {"com.roopy.persistence.repository"}
+	basePackages = {"com.roopy.persistence.pgsql.repository"}
 )
 @MapperScan(
 	sqlSessionFactoryRef = "pgsqlSqlSessionFactory",
-	basePackages = {"com.roopy.persistence.mapper"}
+	basePackages = {"com.roopy.persistence.pgsql.mapper"}
 )
 public class PgSQLDb extends BaseDataBaseConfig {
 
