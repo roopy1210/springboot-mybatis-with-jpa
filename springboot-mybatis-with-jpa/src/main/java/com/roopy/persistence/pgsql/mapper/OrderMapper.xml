@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.roopy.persistence.pgsql.mapper.OrderMapper">
+
+	<!--
+	======================================================================================================
+	주문정보조회결과 ResultMap
+	======================================================================================================
+	-->
+	<resultMap type="Orderm" id="orderResultMap">
+		<id property="orderId" column="order_id" />
+		<result property="orderer_id" column="ordererId" />
+		<result property="order_dtm" column="orderDtm" />
+		<result property="total_order_amt" column="totalOrderAmt" />
+		<result property="order_status" column="orderStatus" />
+				
+		<!-- 주문상세 정보 조회 -->
+		<collection property="orderDetails" 
+			column="{orderId=order_id}" 
+			javaType="java.util.ArrayList" 
+			ofType="OrderDetail"
+			select="findOrderDetailByOrderId"/>
+	</resultMap>
+
+	<!--
+	======================================================================================================
+	주문정보조회
+	======================================================================================================
+	-->
+	<select id="findOrder" resultMap="orderResultMap">
+		select order_id
+		     , orderer_id
+		     , order_dtm
+		     , total_order_amt
+		     , order_status
+		  from orderm
+		 where order_id = #{orderId}
+	</select>
+
+	<!--
+	======================================================================================================
+	주문상세정보조회
+	======================================================================================================
+	-->
+	<select id="findOrderDetailByOrderId" resultType="OrderDetail">
+		select order_id
+		     , order_seq
+		     , prod_cd
+		     , qty
+		     , order_amt
+		  from order_detail
+		 where order_id = #{orderId}
+	</select>
+
+</mapper>

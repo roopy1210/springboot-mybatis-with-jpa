@@ -16,6 +16,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 /**
  * PostgreSQL DB 설정
  */
@@ -43,10 +45,11 @@ public class PgSQLDb extends BaseDataBaseConfig {
 	 * @return
 	 */
 	@Bean(name = "pgsqlDataSource")
-	@ConfigurationProperties(prefix = "spring.datasoure.pgsqlds")
-	public DataSource dataSource() {
-		return DataSourceBuilder.create().build();
-	}
+	@ConfigurationProperties("spring.datasource.pgsqlds")
+    public DataSource dataSource2()
+    {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+    }
 	
 	/**
 	 * EntityManagerFactory 생성
@@ -55,7 +58,7 @@ public class PgSQLDb extends BaseDataBaseConfig {
 	 * @return
 	 */
 	@Bean(name = "pgsqlEntityManagerFactory")
-	public EntityManagerFactory entityManagerFactory(@Qualifier("pgsqlDataSource") DataSource dataSource) {
+	public EntityManagerFactory entityManagerFactory(@Qualifier("pgsqlDataSource") HikariDataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setDataSource(dataSource);
 		factory.setPackagesToScan("com.roopy.domain");
@@ -74,6 +77,7 @@ public class PgSQLDb extends BaseDataBaseConfig {
 	 */
 	@Bean(name = "pgsqlSqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory(@Qualifier("pgsqlDataSource") DataSource dataSource) throws Exception {
+		
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 		setConfigureSqlSessionFactory(sessionFactoryBean, dataSource);
 		

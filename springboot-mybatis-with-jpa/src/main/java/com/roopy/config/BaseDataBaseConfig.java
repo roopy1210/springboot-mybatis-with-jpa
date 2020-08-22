@@ -12,11 +12,12 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import com.google.common.collect.ImmutableMap;
+import com.zaxxer.hikari.HikariConfig;
 
 /**
  * Jpa, myBatis 정보 설정 클래스
  */
-public class BaseDataBaseConfig {
+public class BaseDataBaseConfig extends HikariConfig {
 	
 	/**
 	 * JPA 정보 설정

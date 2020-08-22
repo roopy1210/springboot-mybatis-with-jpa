@@ -16,6 +16,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 /**
  * MySQL DB 설정
  */
@@ -43,10 +45,11 @@ public class MySQLDb extends BaseDataBaseConfig {
 	 * @return
 	 */
 	@Bean(name = "mysqlDataSource")
-	@ConfigurationProperties(prefix = "spring.datasoure.mysqlds")
-	public DataSource dataSource() {
-		return DataSourceBuilder.create().build();
-	}
+	@ConfigurationProperties(prefix = "spring.datasource.mysqlds")
+	public DataSource dataSource2()
+    {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+    }
 	
 	/**
 	 * EntityManagerFactory 생성

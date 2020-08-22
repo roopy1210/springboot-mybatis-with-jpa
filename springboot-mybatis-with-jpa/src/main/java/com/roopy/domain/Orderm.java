@@ -35,7 +35,7 @@ public class Orderm {
 	public String orderDtm;
 	
 	@Column(name = "total_order_amt", nullable = false)
-	public Integer orderCmpnyNm;
+	public Integer totalOrderAmt;
 	
 	@Column(name = "order_status", nullable = false, length = 1)
 	public String orderStatus;

@@ -24,7 +24,8 @@ spring:
       driver-class-name: org.postgresql.Driver
       jdbc-url: jdbc:postgresql://localhost:5432/postgres
       username: postgres
-      password: admin !@34
+      password: admin!@34      
+      
 logging:
   level:
     org.springframework.web: INFO
