@@ -30,6 +30,4 @@ logging:
   level:
     org.springframework.web: INFO
     org.hibernate: INFO
-    com.roopy: DEBUG     
-      
-      
+    com.roopy: DEBUG
