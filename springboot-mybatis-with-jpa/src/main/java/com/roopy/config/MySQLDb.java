@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -44,6 +45,7 @@ public class MySQLDb extends BaseDataBaseConfig {
 	 * 
 	 * @return
 	 */
+	@Primary
 	@Bean(name = "mysqlDataSource")
 	@ConfigurationProperties(prefix = "spring.datasource.mysqlds")
 	public DataSource dataSource2()
@@ -57,6 +59,7 @@ public class MySQLDb extends BaseDataBaseConfig {
 	 * @param dataSource
 	 * @return
 	 */
+	@Primary
 	@Bean(name = "mysqlEntityManagerFactory")
 	public EntityManagerFactory entityManagerFactory(@Qualifier("mysqlDataSource") DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -89,6 +92,7 @@ public class MySQLDb extends BaseDataBaseConfig {
 	 * @param entityManagerFactory
 	 * @return
 	 */
+	@Primary
 	@Bean(name = "mysqlTransactionManager")
 	public PlatformTransactionManager transactionManager(
 			@Qualifier("mysqlEntityManagerFactory") EntityManagerFactory entityManagerFactory) {

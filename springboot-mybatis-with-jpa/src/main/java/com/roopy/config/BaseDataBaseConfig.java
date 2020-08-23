@@ -7,17 +7,15 @@ import javax.sql.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import com.google.common.collect.ImmutableMap;
-import com.zaxxer.hikari.HikariConfig;
 
 /**
  * Jpa, myBatis 정보 설정 클래스
  */
-public class BaseDataBaseConfig extends HikariConfig {
+public class BaseDataBaseConfig {
 	
 	/**
 	 * JPA 정보 설정
@@ -28,7 +26,8 @@ public class BaseDataBaseConfig extends HikariConfig {
 	protected void setConfigureEntityManagerFactory(LocalContainerEntityManagerFactoryBean factory, String dbmsType) {
 		String dialectName = "P".equals(dbmsType) ? "org.hibernate.dialect.PostgreSQLDialect" : "org.hibernate.dialect.MySQL5Dialect";
 		
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		HibernateJpaVendorAdapter  vendorAdapter = new HibernateJpaVendorAdapter();
+		vendorAdapter.setShowSql(true);
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setJpaPropertyMap(ImmutableMap.of(
 			"hibernate.hbm2ddl.auto","none",
