@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -43,4 +46,8 @@ public class Orderm {
 	@OneToMany(mappedBy="orderm",cascade=CascadeType.ALL)
 	public List<OrderDetail> orderDetails;
 	
+	@Override
+	public String toString() {
+		return new ReflectionToStringBuilder(this, new MultilineRecursiveToStringStyle()).toString();
+	}
 }
